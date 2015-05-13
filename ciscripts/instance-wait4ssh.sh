@@ -16,6 +16,7 @@ function retry_until() {
   local sleep_sec=${RETRY_SLEEP_SEC:-3}
   local tries=0
   local start_at=$(date +%s)
+  local chk_cmd=
 
   while :; do
     eval "${blk}" && {
@@ -75,13 +76,20 @@ function wait_for_sshd_to_be_ready() {
 instance_id="${1}"
 : "${instance_id:?"should not be empty"}"
 
+## wait...
+
+retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: running")"' ]]
+
 ## get the instance's ipaddress
 
-ipaddr=
-eval "$(
-  ${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}"
+ipaddr="$(
+  mussel instance show "${instance_id}" \
+  | egrep :address: \
+  | awk '{print $2}' \
+  | tr '\n' ','
 )"
 : "${ipaddr:?"should not be empty"}"
+ipaddr="${ipaddr%%,}"
 
 ## wait...
 
