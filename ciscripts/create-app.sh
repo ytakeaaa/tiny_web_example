@@ -22,14 +22,12 @@ cat <<EOS > "${vifs}"
  "eth0":{"network":"${network_id}","security_groups":"${security_group_id}"}
 }
 EOS
-cat "${vifs}"
 
 # setup user_data.txt
 
 user_data="user_data.txt"
 cat <<EOS > "${user_data}"
 EOS
-cat "${user_data}"
 
 # instance-specific parameter
 
