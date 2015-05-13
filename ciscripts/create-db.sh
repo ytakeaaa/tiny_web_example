@@ -40,8 +40,9 @@ image_id="wmi-mysqld1d64"
 display_name="db"
 ssh_key_id="ssh-cicddemo"
 
-# mussel
+## create an instance
 
+instance_id="$(
   mussel instance create \
    --cpu-cores    "${cpu_cores}"    \
    --hypervisor   "${hypervisor}"   \
@@ -51,3 +52,7 @@ ssh_key_id="ssh-cicddemo"
    --vifs         "${vifs}"         \
    --user-data    "${user_data}"    \
    --display-name "${display_name}" \
+  | egrep ^:id: | awk '{print $2}'
+)"
+: "${instance_id:?"should not be empty"}"
+echo instance_id="${instance_id}"
