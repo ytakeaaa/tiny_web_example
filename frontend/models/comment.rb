@@ -2,7 +2,7 @@
 
 require 'sequel'
 
-Sequel.connect("mysql2://localhost/tiny_web_example?user=root")
+Sequel.connect(settings.database_uri)
 
 class Comment < Sequel::Model
   plugin :validation_helpers

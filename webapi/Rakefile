@@ -10,6 +10,7 @@ task :environment do
   require 'webapi'
   Webapi::Configurations.load Webapi::Configurations::Webapi, [
     ENV['CONF_PATH'].to_s,
+    '/etc/tiny-web-example/webapi.conf',
     File.expand_path('config/webapi.conf', ::WEBAPI_ROOT)
   ]
 end

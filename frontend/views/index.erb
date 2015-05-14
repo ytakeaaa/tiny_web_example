@@ -7,6 +7,11 @@
       </div>
     </div>
     <div class="panel-body">
+      <div class="col-sm-offset-2">
+        <h4>
+          <p class="text-danger"><%= @errors %></p>
+        </h4>
+      </div>
       <form action="/comment" method="post" class="form-horizontal">
         <div class="form-group">
           <label for="exampleInputName" class="col-sm-2 control-label">Name</label>
@@ -36,14 +41,14 @@
       <div class="panel-heading">
         <div class="panel-title">
           <h4>
-            No. <%= comment.id %>
-            Name <%= comment.display_name %>
-            Created at <%= comment.created_at %>
+            No. <%= h(comment.id) %>
+            Name <%= h(comment.display_name) %>
+            Created at <%= h(comment.created_at) %>
           </h4>
         </div>
       </div>
       <div class="panel-body">
-        <%= comment.comment %>
+        <%= h(comment.comment).gsub(/\r\n|\r|\n/, "<br />") %>
       </div>
     </div>
   <% end %>
