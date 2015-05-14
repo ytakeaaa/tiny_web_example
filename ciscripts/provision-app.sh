@@ -19,3 +19,5 @@ fi
 [[ -f /etc/yum.repos.d/tiny-web-example.repo ]]
 sed -i "s,127.0.0.1,${YUM_HOST}," /etc/yum.repos.d/tiny-web-example.repo
 yum repolist
+
+yum install -y tiny-web-example
