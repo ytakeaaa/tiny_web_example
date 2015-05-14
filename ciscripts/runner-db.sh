@@ -17,6 +17,6 @@ eval "$(./instance-get-ipaddr.sh "${instance_id}")"
 {
   ./instance-wait4ssh.sh  "${instance_id}"
   ./instance-exec.sh      "${instance_id}" < ./provision-db.sh
-}
+} >&2
 
 echo instance_id="${instance_id}"
