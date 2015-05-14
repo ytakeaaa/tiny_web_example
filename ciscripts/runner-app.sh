@@ -18,4 +18,4 @@ eval "$(./instance-get-ipaddr.sh "${instance_id}")"
   ./instance-exec.sh      "${instance_id}" < ./provision-app.sh
 }
 
-./instance-kill.sh "${instance_id}"
+echo instance_id="${instance_id}"
