@@ -16,5 +16,6 @@ fi
 : "${DB_HOST:?"should not be empty"}"
 : "${YUM_HOST:?"should not be empty"}"
 
-ls -l /etc/yum.repos.d/tiny-web-example.repo
+[[ -f /etc/yum.repos.d/tiny-web-example.repo ]]
+sed -i "s,127.0.0.1,${YUM_HOST}," /etc/yum.repos.d/tiny-web-example.repo
 yum repolist
