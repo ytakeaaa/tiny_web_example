@@ -1,0 +1,11 @@
+# tiny-web-example
+EXAMPLE_ROOT=/opt/axsh/tiny-web-example
+
+# Commnet out to run the vdc init script.
+#RUN=yes
+
+## rack params
+RACK_ENV=development
+#BIND_ADDR=0.0.0.0
+#PORT=80
+#UNICORN_CONF=/etc/tiny-web-example/unicorn-common.conf

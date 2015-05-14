@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+
+CURDIR ?= $(PWD)
+
+build: build-stamp
+build-stamp: bundle-install
+	touch $@
+bundle-install: bundle-install-stamp
+bundle-install-stamp:
+	(cd $(CURDIR)/webapi && rm -rf vendor/bundle && mkdir -p vendor/bundle && bundle install --standalone --path vendor/bundle)	
+	(cd $(CURDIR)/frontend && rm -rf vendor/bundle && mkdir -p vendor/bundle && bundle install --standalone --path vendor/bundle)	
+
+	# replace /usr/bin/ruby shebangs.
+	# unicorn shebang: /this/will/be/overwritten/or/wrapped/anyways/do/not/worry/ruby
+	egrep -m 1 -r '^#!.*/ruby'  $(CURDIR) | \
+	  grep -v '^Binary file' | \
+	  awk -F: '{print $$1}' | \
+	  while read -r i; do \
+	    echo $$i; \
+	    cp -p $$i $$i.sed ;\
+	    sed -e 's|^#!.*/ruby|#!/usr/bin/ruby|g' < $$i > $$i.sed ;\
+	    mv $$i.sed $$i ;\
+	  done
+
+	touch $@
+
+clean:
+	rm -rf $(CURDIR)/vendor/bundle
+	rm -f $(CURDIR)/bundle-install-stamp
+	rm -f build-stamp
+
