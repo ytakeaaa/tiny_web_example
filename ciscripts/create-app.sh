@@ -52,9 +52,7 @@ EOS
 
 # setup user_data.txt
 
-user_data="user_data.txt"
-cat <<EOS > "${user_data}"
-EOS
+user_data="user_data_app.txt"
 
 # instance-specific parameter
 
