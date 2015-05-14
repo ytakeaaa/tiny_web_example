@@ -7,7 +7,7 @@ set -u
 set -x
 
 eval "$(
-  ./create-centos.sh
+  ./create-app.sh
   )"
 trap "mussel instance destroy \"${instance_id}\"" ERR
 
