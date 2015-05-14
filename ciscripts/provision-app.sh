@@ -11,7 +11,6 @@ set -x
 hostname
 
 if [[ -f /metadata/user-data ]]; then
-  strings /metadata/user-data
   . /metadata/user-data
 fi
 : "${DB_HOST:?"should not be empty"}"
