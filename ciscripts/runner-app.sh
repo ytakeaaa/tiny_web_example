@@ -19,3 +19,4 @@ eval "$(./instance-get-ipaddr.sh "${instance_id}")"
 } >&2
 
 echo instance_id="${instance_id}"
+echo ipaddr="${ipaddr}"
