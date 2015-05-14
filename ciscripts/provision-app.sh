@@ -15,3 +15,6 @@ if [[ -f /metadata/user-data ]]; then
 fi
 : "${DB_HOST:?"should not be empty"}"
 : "${YUM_HOST:?"should not be empty"}"
+
+ls -l /etc/yum.repos.d/tiny-web-example.repo
+yum repolist
