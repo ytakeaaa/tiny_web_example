@@ -1,0 +1,6 @@
+[tiny-web-example]
+name=tiny-web-example
+baseurl=http://127.0.0.1/pub/
+enabled=1
+gpgcheck=0
+
