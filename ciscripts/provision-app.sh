@@ -31,4 +31,7 @@ rpm -qa epel-release* | egrep -q epel-release || {
   yum install -y ca-certificates
 }
 
+# tiny-web-example requires ruby-2.0.0p598
+yum install -y http://dlc.wakame.axsh.jp/demo/ruby-rpm/rhel/6/x86_64/ruby-2.0.0p598-2.el6.x86_64.rpm
+
 yum install -y tiny-web-example
