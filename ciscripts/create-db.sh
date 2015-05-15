@@ -59,7 +59,7 @@ user_data="user_data_db.txt"
 cpu_cores="1"
 hypervisor="kvm"
 memory_size="1024"
-image_id="wmi-mysqld1d64"
+image_id="wmi-mysql1d64"
 display_name="db"
 ssh_key_id="ssh-cicddemo"
 
