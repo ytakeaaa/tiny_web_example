@@ -96,6 +96,8 @@ $ bundle install
 ```
 $ cd tiny_web_example/webapi/config
 $ cp webapi.conf.example webapi.conf
+$ cd tiny_web_example/webapi/spec
+$ cp webapi.conf.example webapi.conf
 ```
 
 ### データベーステーブルの作成
@@ -109,6 +111,5 @@ $ bundle exec rake db:up
 
 ```
 $ cd tiny_web_example/webapi/spec
-$ cp webapi.conf.example webapi.conf
 $ bundle exec rspec ./comment_spec.rb
 ``` 
