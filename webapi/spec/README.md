@@ -26,7 +26,7 @@ DataBaseのIPアドレスを記述します
 # vi webapi.conf
 ```
 
-実行結果例:
+修正結果:
 ```
 # Database connection string
 database_uri 'mysql2://localhost/tiny_web_example?user=root'

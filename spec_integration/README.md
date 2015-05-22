@@ -50,7 +50,7 @@ webapiに接続するDataBaseのIPアドレスを記述します
 # vi webapi.conf
 ```
 
-実行結果例:
+修正結果:
 ```
 uri: 'http://localhost:8080'
 ```

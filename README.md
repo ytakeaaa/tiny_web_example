@@ -238,7 +238,7 @@ baseurlを作成したリポジトリのあるサーバーのIPアドレスに�
 # vi /etc/yum.repos.d/tiny-web-example.repo
 ```
 
-実行結果例:
+修正結果:
 ```
 [tiny-web-example]
 name=tiny-web-example
@@ -459,7 +459,7 @@ webapiの起動スクリプトを修正する
 # vi /etc/default/tiny-web-example-webapi
 ```
 
-実行結果例:
+修正結果:
 ```
 # tiny-web-example
 EXAMPLE_ROOT=/opt/axsh/tiny-web-example
@@ -480,7 +480,7 @@ frontendの起動スクリプトを修正する
 # vi /etc/default/tiny-web-example-webapp
 ```
 
-実行結果例:
+修正結果:
 ```
 # tiny-web-example
 EXAMPLE_ROOT=/opt/axsh/tiny-web-example
@@ -505,7 +505,7 @@ webapi.confの修正
 # vi /etc/tiny-web-example/webapi.conf
 ```
 
-実行結果例:
+修正結果:
 ```
 # Database connection string
 database_uri 'mysql2://localhost/tiny_web_example?user=root'
@@ -516,7 +516,7 @@ webapp.ymlの修正
 # vi /etc/tiny-web-example/webapp.yml
 ```
 
-実行結果例:
+修正結果:
 ```
 database_uri: 'mysql2://localhost/tiny_web_example?user=root'
 ```
