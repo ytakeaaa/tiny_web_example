@@ -357,7 +357,7 @@ Complete!
 
 webapiで使用するgemをインストールする
 ```
-# cd /opt/axsh/tiny_web_example/webapi
+# cd /opt/axsh/tiny-web-example/webapi
 # bundle install
 ```
 
@@ -400,7 +400,7 @@ Bundled gems are installed into ./vendor/bundle.
 
 frontendで使用するgemをインストールする
 ```
-# cd /opt/axsh/tiny_web_example/webapi
+# cd /opt/axsh/tiny-web-example/frontend
 # bundle install
 ```
 
@@ -434,7 +434,7 @@ Bundled gems are installed into ./vendor/bundle.
 
 ### 起動スクリプトの配置
 ```
-# cd /opt/axsh/tiny_web_example/contrib/etc
+# cd /opt/axsh/tiny-web-example/contrib/etc
 # cp default/* /etc/default/
 # cp init/* /etc/init/
 ```
