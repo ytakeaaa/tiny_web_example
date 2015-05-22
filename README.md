@@ -92,6 +92,39 @@ Resolving deltas: 100% (1272/1272), done.
 # exec $SHELL -l
 ```
 
+### ruby-buildに必要なパッケージのインストール
+```
+# yum install -y gcc openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel
+```
+
+実行結果例:
+```
+# yum install -y gcc openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel
+Loaded plugins: fastestmirror
+Setting up Install Process
+Loading mirror speeds from cached hostfile
+ * base: ftp.jaist.ac.jp
+ * epel: ftp.jaist.ac.jp
+ * extras: ftp.jaist.ac.jp
+ * updates: ftp.jaist.ac.jp
+Package gcc-4.4.7-11.el6.x86_64 already installed and latest version
+Resolving Dependencies
+__(省略)__
+
+Installed:
+  gdbm-devel.x86_64 0:1.8.0-36.el6                  libffi-devel.x86_64 0:3.0.5-3.2.el6
+  libyaml-devel.x86_64 0:0.1.3-4.el6_6              ncurses-devel.x86_64 0:5.7-3.20090208.el6
+  openssl-devel.x86_64 0:1.0.1e-30.el6.8            readline-devel.x86_64 0:6.0-4.el6
+  zlib-devel.x86_64 0:1.2.3-29.el6
+
+Dependency Installed:
+  keyutils-libs-devel.x86_64 0:1.4-5.el6             krb5-devel.x86_64 0:1.10.3-37.el6_6
+  libcom_err-devel.x86_64 0:1.41.12-21.el6           libselinux-devel.x86_64 0:2.0.94-5.8.el6
+  libsepol-devel.x86_64 0:2.0.41-4.el6               libyaml.x86_64 0:0.1.3-4.el6_6
+
+Complete!
+```
+
 ### ruby-buildのインストール
 
 ```
@@ -116,6 +149,31 @@ Resolving deltas: 100% (2344/2344), done.
 
 実行結果例:
 ```
+# rbenv install -v 2.0.0-p598
+/tmp/ruby-build.20150522151700.11775 ~
+Downloading ruby-2.0.0-p598.tar.gz...
+HTTP/1.1 200 OK
+Content-Type: binary/octet-stream
+Content-Length: 13608640
+Connection: keep-alive
+Date: Mon, 11 May 2015 13:57:49 GMT
+Last-Modified: Thu, 13 Nov 2014 14:55:37 GMT
+ETag: "e043a21ce0d138fd408518a80aa31bba"
+Accept-Ranges: bytes
+Server: AmazonS3
+X-Cache: RefreshHit from cloudfront
+Via: 1.1 4565d1650806ee8cdd757034d90ec07d.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: gn8DN0xoqLLljcQTklcAR2DABrq7vHhhqsmc2KrZ5Plkwtvpqz8_RA==
+
+-> http://dqw8nmjcqpjn7.cloudfront.net/4136bf7d764cbcc1c7da2824ed2826c3550f2b62af673c79ddbf9049b12095fd
+Installing ruby-2.0.0-p598...
+/tmp/ruby-build.20150522151700.11775/ruby-2.0.0-p598 /tmp/ruby-build.20150522151700.11775 ~
+__(省略)__
+
+Installed ruby-2.0.0-p598 to /root/.rbenv/versions/2.0.0-p598
+
+/tmp/ruby-build.20150522152934.22095 ~
+~
 ```
 
 ### rbenvの再読み込み
@@ -169,7 +227,7 @@ Successfully installed bundler-1.9.9
 ### repoファイルの作成
 ```
 # curl -fsSkL \
-> https://raw.githubusercontent.com/axsh/tiny_web_example/master/rpmbuild/tiny-web-example.repo
+> https://raw.githubusercontent.com/axsh/tiny_web_example/master/rpmbuild/tiny-web-example.repo \
 > -o /etc/yum.repos.d/tiny-web-example.repo
 ```
 
@@ -195,6 +253,48 @@ gpgcheck=0
 ```
 
 実行結果例:
+```
+# yum install -y tiny-web-example
+Loaded plugins: fastestmirror
+Setting up Install Process
+Loading mirror speeds from cached hostfile
+epel/metalink                                                                    | 5.0 kB     00:00
+ * base: ftp.jaist.ac.jp
+ * epel: ftp.jaist.ac.jp
+ * extras: ftp.jaist.ac.jp
+ * updates: ftp.jaist.ac.jp
+base                                                                             | 3.7 kB     00:00
+base/primary_db                                                                  | 4.6 MB     00:00
+epel                                                                             | 4.4 kB     00:00
+epel/primary_db                                                                  | 6.5 MB     00:00
+extras                                                                           | 3.4 kB     00:00
+extras/primary_db                                                                |  31 kB     00:00
+tiny-web-example                                                                 | 2.9 kB     00:00
+tiny-web-example/primary_db                                                      | 3.7 kB     00:00
+updates                                                                          | 3.4 kB     00:00
+updates/primary_db                                                               | 3.3 MB     00:00
+Resolving Dependencies
+__(省略)__
+
+Installed:
+  tiny-web-example.x86_64 0:0.0.1-1.daily.el6
+
+Dependency Installed:
+  GeoIP.x86_64 0:1.6.5-1.el6                            GeoIP-GeoLite-data.noarch 0:2015.04-2.el6
+  GeoIP-GeoLite-data-extra.noarch 0:2015.04-2.el6       compat-readline5.x86_64 0:5.2-17.1.el6
+  fontconfig.x86_64 0:2.8.0-5.el6                       freetype.x86_64 0:2.3.11-15.el6_6.1
+  gd.x86_64 0:2.0.35-11.el6                             geoipupdate.x86_64 0:2.2.1-2.el6
+  libX11.x86_64 0:1.6.0-2.2.el6                         libX11-common.noarch 0:1.6.0-2.2.el6
+  libXau.x86_64 0:1.0.6-4.el6                           libXpm.x86_64 0:3.5.10-2.el6
+  libjpeg-turbo.x86_64 0:1.2.1-3.el6_5                  libpng.x86_64 2:1.2.49-1.el6_2
+  libxcb.x86_64 0:1.9.1-2.el6                           libxslt.x86_64 0:1.1.26-2.el6_3.1
+  mysql.x86_64 0:5.1.73-3.el6_5                         mysql-server.x86_64 0:5.1.73-3.el6_5
+  nginx.x86_64 0:1.0.15-11.el6                          nginx-filesystem.noarch 0:1.0.15-11.el6
+  perl-DBD-MySQL.x86_64 0:4.013-3.el6                   perl-DBI.x86_64 0:1.609-4.el6
+  ruby.x86_64 0:1.8.7.374-4.el6_6                       ruby-libs.x86_64 0:1.8.7.374-4.el6_6
+
+Complete!
+```
 
 ## Gitを使用したインストール
 
