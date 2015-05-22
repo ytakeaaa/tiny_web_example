@@ -8,9 +8,9 @@ tiny_web_exampleはwebapiとfrontendからなる小規模な教材用アプリ�
 
 テストやパッケージ作成方法については以下のディレクトリを参照してください。
 
-> UnitTest:        tiny_web_example/webapi/spec/README.md
-> IntegrationTest: tiny_web_example/spec_integration/README.md
-> RPMBuild:        tiny_web_example/rpmbuild/README.md
+* UnitTest:        tiny_web_example/webapi/spec/README.md
+* IntegrationTest: tiny_web_example/spec_integration/README.md
+* RPMBuild:        tiny_web_example/rpmbuild/README.md
 
 また以下の作業はrootユーザーで行ってください。
 
