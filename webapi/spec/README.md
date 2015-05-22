@@ -21,6 +21,17 @@ CentOS-6.6にて動作確認を行いました。それよりも古い環境の�
 # cp webapi.conf.example webapi.conf
 ```
 
+DataBaseのIPアドレスを記述します
+```
+# vi webapi.conf
+```
+
+実行結果例:
+```
+# Database connection string
+database_uri 'mysql2://localhost/tiny_web_example?user=root'
+```
+
 # Unit Testの実行
 
 ```
