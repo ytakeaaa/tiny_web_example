@@ -28,5 +28,14 @@ eval "$(${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}")"
      bash -l < ${BASH_SOURCE[0]%/*}/provision-app.sh
 } >&2
 
+# include
+
+. ${BASH_SOURCE[0]%/*}/retry.sh
+
+{
+  wait_for_port_to_be_ready "${ipaddr}" tcp 8080
+  wait_for_port_to_be_ready "${ipaddr}" tcp 80
+} >&2
+
 echo instance_id="${instance_id}"
 echo ipaddr="${ipaddr}"

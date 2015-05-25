@@ -39,9 +39,6 @@ trap "
 
 ## app
 
-## need to wait for api to be running
-## need to wait for web to be running
-
 APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-app.sh
 
 # cleanup instances
