@@ -10,12 +10,16 @@ set -x
 
 # required shell params
 
-: "${API_HOST:?"should not be empty"}"
+: "${APP_HOST:?"should not be empty"}"
 
 #
 
-api_url="http://${API_HOST}:8080/api/0.0.1/comments"
+api_url="http://${APP_HOST}:8080/api/0.0.1/comments"
 
 curl -fs -X POST --data-urlencode display_name='webapi test' --data-urlencode comment='sample message.' ${api_url}
 curl -fs -X GET ${api_url}
 curl -fs -X GET ${api_url}/1
+
+#
+
+curl -fs -X GEt http://${APP_HOST}/

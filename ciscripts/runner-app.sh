@@ -23,8 +23,8 @@ eval "$(${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}")"
 {
   ${BASH_SOURCE[0]%/*}/instance-wait4ssh.sh  "${instance_id}"
   ${BASH_SOURCE[0]%/*}/instance-exec.sh      "${instance_id}" \
-    YUM_HOST=${YUM_HOST} \
-     DB_HOST=${DB_HOST}  \
+    YUM_HOST="${YUM_HOST}" \
+     DB_HOST="${DB_HOST}"  \
      bash -l < ${BASH_SOURCE[0]%/*}/provision-app.sh
 } >&2
 
