@@ -8,8 +8,10 @@ set -o pipefail
 set -u
 set -x
 
-YUM_HOST="${YUM_HOST:-"10.0.22.100"}"
-DB_HOST="${DB_HOST:-"10.0.22.101"}"
+# required shell params
+
+: "${YUM_HOST:?"should not be empty"}"
+: "${DB_HOST:?"should not be empty"}"
 
 # install tiny-web-example.repo
 cat <<-EOS > /etc/yum.repos.d/tiny-web-example.repo
@@ -59,9 +61,10 @@ cat <<-'EOS' > /etc/default/tiny-web-example-webapp
 	EOS
 
 # configure db host
-sed -i \
- "s,^database_uri .*,database_uri 'mysql2://${DB_HOST}/tiny_web_example?user=root'," \
- /etc/tiny-web-example/webapi.conf /etc/tiny-web-example/webapp.yml
+for config in /etc/tiny-web-example/webapi.conf /etc/tiny-web-example/webapp.yml; do
+  sed -i "s,'mysql://localhost/tiny_web_example?user=root','mysql2://${DB_HOST}/tiny_web_example?user=root'," ${config}
+  egrep ^database_uri ${config}
+done
 
 # setup db
 cd /opt/axsh/tiny-web-example/webapi/
