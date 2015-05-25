@@ -45,3 +45,14 @@ if mysql -u${dbuser} ${dbname} <<< ""; then
   mysqladmin -u${dbuser} drop ${dbname} <<< "Y"
 fi
 mysqladmin -uroot create ${dbname} --default-character-set=utf8
+
+# stop mysqld service
+service "${svc}" stop
+
+# wait for mysqld not to be ready
+until ! mysqladmin -uroot ping; do
+  sleep 1
+done
+
+#
+sync
