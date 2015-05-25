@@ -31,7 +31,7 @@ EOS
 
 cpu_cores="1"
 hypervisor="kvm"
-memory_size="1024"
+memory_size="512"
 image_id="wmi-kamsc50b"
 display_name="db"
 ssh_key_id="ssh-cicddemo"
