@@ -22,4 +22,4 @@ curl -fs -X GET ${api_url}/1
 
 #
 
-curl -fs -X GEt http://${APP_HOST}/
+curl -fs -X GET http://${APP_HOST}/
