@@ -6,18 +6,12 @@ set -o pipefail
 set -u
 set -x
 
-# myaddr
-
-eval "$(./myaddr.sh)"
-yum_host="${ipaddr}"
-
 # run instances
 
 ## db
 
 eval "$(./runner-db.sh)"
 db_id="${instance_id}"
-echo "YUM_HOST=${yum_host}" | tee -a user_data_app.txt
 
 ## app
 

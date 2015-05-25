@@ -50,10 +50,6 @@ cat <<EOS > "${vifs}"
 }
 EOS
 
-# setup user_data.txt
-
-user_data="user_data_centos.txt"
-
 # instance-specific parameter
 
 cpu_cores="1"
@@ -73,7 +69,6 @@ instance_id="$(
    --memory-size  "${memory_size}"  \
    --ssh-key-id   "${ssh_key_id}"   \
    --vifs         "${vifs}"         \
-   --user-data    "${user_data}"    \
    --display-name "${display_name}" \
   | egrep ^:id: | awk '{print $2}'
 )"
