@@ -588,10 +588,10 @@ database_uri: 'mysql2://localhost/tiny_web_example?user=root'
 ```
 
 実行結果例:
-```
-# initctl start tiny-web-example-webapi RUN=yes
-tiny-web-example-webapi start/running, process 2996
-```
+>```
+># initctl start tiny-web-example-webapi RUN=yes
+>tiny-web-example-webapi start/running, process 2996
+>```
 
 ## frontendの起動
 ```
@@ -599,10 +599,10 @@ tiny-web-example-webapi start/running, process 2996
 ```
 
 実行結果例:
-```
-# initctl start tiny-web-example-webapp RUN=yes
-tiny-web-example-webapp start/running, process 2988
-```
+>```
+># initctl start tiny-web-example-webapp RUN=yes
+>tiny-web-example-webapp start/running, process 2988
+>```
 
 # アプリケーションの動作確認
 
@@ -610,7 +610,7 @@ tiny-web-example-webapp start/running, process 2988
 
 POSTの確認
 ```
-# curl -X POST --data-urlencode display_name='webapi test' --data-urlencode comment='sample message.' http://localhost:8080/api/0.0.1/comments
+# curl -fs -X POST --data-urlencode display_name='webapi test' --data-urlencode comment='sample message.' http://localhost:8080/api/0.0.1/comments
 ```
 
 実行結果例:
@@ -620,7 +620,7 @@ POSTの確認
 
 GETの確認(list)
 ```
-# curl -X GET http://localhost:8080/api/0.0.1/comments
+# curl -fs -X GET http://localhost:8080/api/0.0.1/comments
 ```
 
 実行結果例:
@@ -630,7 +630,7 @@ GETの確認(list)
 
 GETの確認(show)
 ```
-# curl -X GET http://localhost:8080/api/0.0.1/comments/1
+# curl -fs -X GET http://localhost:8080/api/0.0.1/comments/1
 ```
 
 実行結果例:
