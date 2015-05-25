@@ -62,7 +62,7 @@ cat <<-'EOS' > /etc/default/tiny-web-example-webapp
 
 # configure db host
 for config in /etc/tiny-web-example/webapi.conf /etc/tiny-web-example/webapp.yml; do
-  sed -i "s,'mysql://localhost/tiny_web_example?user=root','mysql2://${DB_HOST}/tiny_web_example?user=root'," ${config}
+  sed -i "s,localhost,${DB_HOST}," ${config}
   egrep ^database_uri ${config}
 done
 
