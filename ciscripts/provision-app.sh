@@ -62,8 +62,8 @@ cat <<-'EOS' > /etc/default/tiny-web-example-webapp
 
 # configure db host
 for config in /etc/tiny-web-example/webapi.conf /etc/tiny-web-example/webapp.yml; do
-  sed -i "s,localhost,${DB_HOST}," ${config}
-  egrep "${DB_HOST}" ${config}
+  sed -i "s,localhost,${DB_HOST}," "${config}"
+  egrep "${DB_HOST}" "${config}"
 done
 
 # setup db
