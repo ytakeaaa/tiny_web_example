@@ -28,9 +28,19 @@ eval "$(
 app_id="${instance_id}"
 APP_HOST="${ipaddr}"
 
+## trap
+
+trap "
+ mussel instance destroy \"${db_id}\"
+ mussel instance destroy \"${app_id}\"
+" ERR
+
 # smoketest
 
 ## app
+
+## need to wait for api to be running
+## need to wait for web to be running
 
 APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-app.sh
 
