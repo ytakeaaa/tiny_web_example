@@ -59,7 +59,7 @@ user_data="user_data_app.txt"
 cpu_cores="1"
 hypervisor="kvm"
 memory_size="1024"
-image_id="wmi-centos1d64"
+image_id="wmi-43n0y4mk"
 display_name="app"
 ssh_key_id="ssh-cicddemo"
 
