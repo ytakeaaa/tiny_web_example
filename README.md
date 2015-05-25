@@ -588,10 +588,10 @@ database_uri: 'mysql2://localhost/tiny_web_example?user=root'
 ```
 
 実行結果例:
-```
-# initctl start tiny-web-example-webapi RUN=yes
-tiny-web-example-webapi start/running, process 2996
-```
+>```
+># initctl start tiny-web-example-webapi RUN=yes
+>tiny-web-example-webapi start/running, process 2996
+>```
 
 ## frontendの起動
 ```
@@ -599,10 +599,10 @@ tiny-web-example-webapi start/running, process 2996
 ```
 
 実行結果例:
-```
-# initctl start tiny-web-example-webapp RUN=yes
-tiny-web-example-webapp start/running, process 2988
-```
+>```
+># initctl start tiny-web-example-webapp RUN=yes
+>tiny-web-example-webapp start/running, process 2988
+>```
 
 # アプリケーションの動作確認
 
