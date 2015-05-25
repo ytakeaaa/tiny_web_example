@@ -33,7 +33,7 @@ cpu_cores="1"
 hypervisor="kvm"
 memory_size="1024"
 image_id="wmi-centos1d64"
-display_name="db"
+display_name="imgdb"
 ssh_key_id="ssh-cicddemo"
 
 ## create an instance
