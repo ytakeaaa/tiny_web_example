@@ -4,7 +4,6 @@
 set -e
 set -o pipefail
 set -u
-set -x
 
 # required shell params
 
