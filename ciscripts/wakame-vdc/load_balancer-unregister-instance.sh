@@ -22,7 +22,7 @@ while [[ "${1:-""}" ]]; do
   instance_id="${1}"
   echo "unregister ${instance_id} from ${load_balancer_id}..." >&2
   eval "$(${BASH_SOURCE[0]%/*}/instance-get-vif.sh "${instance_id}")"
-  ${BASH_SOURCE[0]%/*}/load_balancer-unregister.sh "${load_balancer_id}" ${vif} >/dev/null
+  ${BASH_SOURCE[0]%/*}/load_balancer-unregister-vif.sh "${load_balancer_id}" ${vif} >/dev/null
   shift
 done
 
