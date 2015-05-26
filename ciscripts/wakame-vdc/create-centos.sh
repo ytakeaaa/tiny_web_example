@@ -18,11 +18,7 @@ network_id="nw-demo1"
 security_group_id="sg-cicddemo"
 vifs="vifs.json"
 
-cat <<EOS > "${vifs}"
-{
- "eth0":{"network":"${network_id}","security_groups":"${security_group_id}"}
-}
-EOS
+. ${BASH_SOURCE[0]%/*}/gen-vifs.sh
 
 # instance-specific parameter
 
