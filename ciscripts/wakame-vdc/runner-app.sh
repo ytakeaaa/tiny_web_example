@@ -19,6 +19,7 @@ eval "$(
 trap "mussel instance destroy \"${instance_id}\"" ERR
 
 eval "$(${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}")"
+eval "$(${BASH_SOURCE[0]%/*}/instance-get-vif.sh    "${instance_id}")"
 
 {
   ${BASH_SOURCE[0]%/*}/instance-wait4ssh.sh  "${instance_id}"
@@ -37,3 +38,4 @@ eval "$(${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}")"
 
 echo instance_id="${instance_id}"
 echo ipaddr="${ipaddr}"
+echo vif="${vif}"
