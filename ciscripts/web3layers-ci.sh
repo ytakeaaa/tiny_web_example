@@ -10,6 +10,10 @@ set -x
 
 : "${YUM_HOST:?"should not be empty"}"
 
+#
+
+cd ${BASH_SOURCE[0]%/*}/wakame-vdc
+
 # run instances
 
 ## db
