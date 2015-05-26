@@ -1,12 +1,3 @@
-## Script Chain
-
-1. run `runner-app.sh`
-  1. run `create-app.sh`
-  2. run `provision-app.sh`
-2. run `runner-db.sh`
-  1. run `create-db.sh`
-  2. run `provision-db.sh`
-
 ## JenkinsCI
 
 Add the following code to JenkinsCI shell job.
@@ -22,5 +13,7 @@ set -x
 
 cd ciscripts
 ls -l
-./web3layers-ci.sh
+
+ipaddr="$(< /metadata/meta-data/local-ipv4)"
+YUM_HOST="${ipaddr}" ./web3layers-ci.sh
 ```
