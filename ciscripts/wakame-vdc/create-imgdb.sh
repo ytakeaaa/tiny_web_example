@@ -10,10 +10,7 @@ set -u
 
 # setup musselrc
 
-cat <<EOS > ~/.musselrc
-DCMGR_HOST=10.0.2.2
-account_id=a-shpoolxx
-EOS
+${BASH_SOURCE[0]%/*}/gen-musselrc.sh
 
 # setup vifs.json
 
