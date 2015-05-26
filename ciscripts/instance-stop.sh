@@ -18,7 +18,7 @@ instance_id="${1}"
 
 ## create an instance
 
-mussel instance poweroff "${instance_id}" >/dev/null
+mussel instance poweroff "${instance_id}" --force false >/dev/null
 echo "${instance_id} is halting..." >&2
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: halted")"' ]]
