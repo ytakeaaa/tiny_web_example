@@ -4,17 +4,11 @@ set -e
 set -o pipefail
 set -u
 
-# setup musselrc
-
-${BASH_SOURCE[0]%/*}/gen-musselrc.sh
-
-# setup vifs.json
+# vifs
 
 network_id="nw-demo1"
 security_group_id="sg-cicddemo"
 vifs="vifs.json"
-
-. ${BASH_SOURCE[0]%/*}/gen-vifs.sh
 
 # instance-specific parameter
 
@@ -26,6 +20,9 @@ display_name="imgdb"
 ssh_key_id="ssh-cicddemo"
 
 ## create an instance
+
+${BASH_SOURCE[0]%/*}/gen-musselrc.sh
+. ${BASH_SOURCE[0]%/*}/gen-vifs.sh
 
 instance_id="$(
   mussel instance create \

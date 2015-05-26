@@ -19,6 +19,8 @@ display_name="lb8080"
 
 ## create a load_balancer
 
+${BASH_SOURCE[0]%/*}/gen-musselrc.sh
+
 load_balancer_id="$(
   mussel load_balancer create \
    --balance-algorithm "${balance_algorithm}" \
