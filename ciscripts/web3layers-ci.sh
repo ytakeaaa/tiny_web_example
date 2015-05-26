@@ -32,9 +32,20 @@ eval "$(
 app_id="${instance_id}"
 APP_HOST="${ipaddr}"
 
+# run load balancers
+
+## lbapp
+
+eval "$(${BASH_SOURCE[0]%/*}/runner-lbapp.sh)"
+lbapp_id="${load_balancer_id}"
+LBAPP_HOST="${ipaddr_public}"
+
+${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${lbapp_id}" "${app_id}"
+
 ## trap
 
 trap "
+ ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${lbapp_id}\"
  mussel instance destroy \"${db_id}\"
  mussel instance destroy \"${app_id}\"
 " ERR
@@ -51,6 +62,10 @@ else
   # stand alone
   APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-app.sh
 fi
+
+# cleanup load balancers
+
+${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${lbapp_id}"
 
 # cleanup instances
 
