@@ -34,18 +34,18 @@ APP_HOST="${ipaddr}"
 
 # run load balancers
 
-## lbapp
+## lbweb
 
-eval "$(${BASH_SOURCE[0]%/*}/runner-lbapp.sh)"
-lbapp_id="${load_balancer_id}"
-LBAPP_HOST="${ipaddr_public}"
+eval "$(${BASH_SOURCE[0]%/*}/runner-lbweb.sh)"
+lbweb_id="${load_balancer_id}"
+LBWEB_HOST="${ipaddr_public}"
 
-${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${lbapp_id}" "${app_id}"
+${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${lbweb_id}" "${app_id}"
 
 ## trap
 
 trap "
- ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${lbapp_id}\"
+ ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${lbweb_id}\"
  mussel instance destroy \"${db_id}\"
  mussel instance destroy \"${app_id}\"
 " ERR
@@ -60,12 +60,14 @@ if [[ -n "${JENKINS_HOME:-""}" ]]; then
   echo not implemented so far.
 else
   # stand alone
-  APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-app.sh
+  APP_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-app.sh
+  WEB_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-web.sh
+  WEB_HOST="${LBWEB_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-web.sh
 fi
 
 # cleanup load balancers
 
-${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${lbapp_id}"
+${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${lbweb_id}"
 
 # cleanup instances
 
