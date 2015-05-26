@@ -7,16 +7,14 @@ set -e
 set -o pipefail
 set -u
 
-## functions
-
-. ${BASH_SOURCE[0]%/*}/retry.sh
-
 ## shell params
 
 instance_id="${1}"
 : "${instance_id:?"should not be empty"}"
 
 ## wait...
+
+. ${BASH_SOURCE[0]%/*}/retry.sh
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: running")"' ]]
 

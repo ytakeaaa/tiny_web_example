@@ -4,10 +4,6 @@ set -e
 set -o pipefail
 set -u
 
-# include
-
-. ${BASH_SOURCE[0]%/*}/retry.sh
-
 # setup musselrc
 
 ${BASH_SOURCE[0]%/*}/gen-musselrc.sh
@@ -48,6 +44,8 @@ echo "${instance_id} is initializing..." >&2
 trap "mussel instance destroy \"${instance_id}\"" ERR
 
 ## wait for the instance to be running
+
+. ${BASH_SOURCE[0]%/*}/retry.sh
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: running")"' ]]
 echo instance_id="${instance_id}"

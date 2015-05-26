@@ -7,10 +7,6 @@ set -e
 set -o pipefail
 set -u
 
-## include
-
-. ${BASH_SOURCE[0]%/*}/retry.sh
-
 ## shell params
 
 instance_id="${1}"
@@ -26,6 +22,8 @@ image_id="$(
 echo "${image_id} is creating..." >&2
 
 ## wait for the image to be available
+
+. ${BASH_SOURCE[0]%/*}/retry.sh
 
 retry_until [[ '"$(mussel image show "${image_id}" | egrep -w "^:state: available")"' ]]
 echo image_id="${image_id}"

@@ -7,10 +7,6 @@ set -e
 set -o pipefail
 set -u
 
-## include
-
-. ${BASH_SOURCE[0]%/*}/retry.sh
-
 ## shell params
 
 instance_id="${1}"
@@ -20,6 +16,8 @@ instance_id="${1}"
 
 mussel instance poweroff "${instance_id}" --force false >/dev/null
 echo "${instance_id} is halting..." >&2
+
+. ${BASH_SOURCE[0]%/*}/retry.sh
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: halted")"' ]]
 echo instance_id="${instance_id}"

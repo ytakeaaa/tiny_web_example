@@ -7,10 +7,6 @@ set -e
 set -o pipefail
 set -u
 
-# include
-
-. ${BASH_SOURCE[0]%/*}/retry.sh
-
 ## shell params
 
 balance_algorithm="leastconn"
@@ -47,6 +43,8 @@ echo "${load_balancer_id} is initializing..." >&2
 trap "mussel load_balancer destroy \"${load_balancer_id}\"" ERR
 
 ## wait for the load_balancer to be running
+
+. ${BASH_SOURCE[0]%/*}/retry.sh
 
 retry_until [[ '"$(mussel load_balancer show "${load_balancer_id}" | egrep -w "^:state: running")"' ]]
 echo load_balancer_id="${load_balancer_id}"

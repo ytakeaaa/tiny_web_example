@@ -7,10 +7,6 @@ set -e
 set -o pipefail
 set -u
 
-## include
-
-. ${BASH_SOURCE[0]%/*}/retry.sh
-
 ## shell params
 
 instance_id="${1}"
