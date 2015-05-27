@@ -42,8 +42,9 @@ if [[ -n "${JENKINS_HOME:-""}" ]]; then
     APP_HOST="${APP_HOST}" ./ciscripts/integration-test.sh
   )
 else
-  # stand alone
   APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-app.sh
 fi
+
+## web
 
 WEB_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-web.sh
