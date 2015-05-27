@@ -36,15 +36,15 @@ APP_HOST="${ipaddr}"
 ## lbweb
 
 eval "$(${BASH_SOURCE[0]%/*}/runner-lbweb.sh)"
-lbweb_id="${load_balancer_id}"
+LDWEB_ID="${load_balancer_id}"
 LBWEB_HOST="${ipaddr_public}"
 
-${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${lbweb_id}" "${APP_ID}"
+${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${LDWEB_ID}" "${APP_ID}"
 
 ## trap
 
 trap "
- ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${lbweb_id}\"
+ ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${LDWEB_ID}\"
  mussel instance destroy \"${DB_ID}\"
  mussel instance destroy \"${APP_ID}\"
 " ERR
@@ -66,7 +66,7 @@ trap "
 
 # cleanup load balancers
 
-${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${lbweb_id}"
+${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${LDWEB_ID}"
 
 # cleanup instances
 
