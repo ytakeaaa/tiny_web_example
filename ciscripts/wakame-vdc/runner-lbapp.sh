@@ -11,7 +11,7 @@ set -x
 eval "$(
   ${BASH_SOURCE[0]%/*}/create-lbapp.sh
   )"
-trap "mussel load_balancer destroy \"${load_balancer_id}\"" ERR
+trap 'mussel load_balancer destroy "${load_balancer_id}"' ERR
 
 eval "$(${BASH_SOURCE[0]%/*}/load_balancer-get-ipaddr.sh "${load_balancer_id}")"
 

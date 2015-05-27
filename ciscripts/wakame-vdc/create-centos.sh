@@ -41,7 +41,7 @@ instance_id="$(
 : "${instance_id:?"should not be empty"}"
 echo "${instance_id} is initializing..." >&2
 
-trap "mussel instance destroy \"${instance_id}\"" ERR
+trap 'mussel instance destroy "${instance_id}"' ERR
 
 ## wait for the instance to be running
 

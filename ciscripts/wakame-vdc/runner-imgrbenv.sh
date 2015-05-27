@@ -9,7 +9,7 @@ set -x
 eval "$(
   ${BASH_SOURCE[0]%/*}/create-imgrbenv.sh
   )"
-trap "mussel instance destroy \"${instance_id}\"" ERR
+trap 'mussel instance destroy "${instance_id}"' ERR
 
 eval "$(${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}")"
 
