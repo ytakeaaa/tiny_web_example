@@ -37,7 +37,10 @@ trap '
 
 if [[ -n "${JENKINS_HOME:-""}" ]]; then
   # called by jenkins
-  APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/../integration-test.sh
+  (
+    cd ${BASH_SOURCE[0]%/*}/../../
+    APP_HOST="${APP_HOST}" ./ciscripts/integration-test.sh
+  )
 else
   # stand alone
   APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-app.sh
