@@ -41,11 +41,11 @@ trap '
 
 ## app
 
-#if [[ -n "${JENKINS_HOME:-""}" ]]; then
-#  # called by jenkins
-#  # TODO
-#  echo not implemented so far.
-#else
+if [[ -n "${JENKINS_HOME:-""}" ]]; then
+  # called by jenkins
+  # TODO
+  echo not implemented so far.
+else
   # stand alone
   APP_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-app.sh
   WEB_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-web.sh
