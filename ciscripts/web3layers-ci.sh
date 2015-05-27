@@ -8,6 +8,8 @@ set -u
 # required shell params
 
 : "${YUM_HOST:?"should not be empty"}"
+: "${DB_IMAGE_ID:?"should not be empty"}"
+: "${APP_IMAGE_ID:?"should not be empty"}"
 
 #
 
@@ -16,10 +18,12 @@ cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 # setup instances
 
 eval "$(
+ IMAGE_ID="${DB_IMAGE_ID}" \
   ${BASH_SOURCE[0]%/*}/setup-db.sh
 )"
 
 eval "$(
+ IMAGE_ID="${APP_IMAGE_ID}" \
   YUM_HOST="${YUM_HOST}" DB_HOST="${DB_HOST}" \
   ${BASH_SOURCE[0]%/*}/setup-app.sh
 )"
