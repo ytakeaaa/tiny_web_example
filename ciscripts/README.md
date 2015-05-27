@@ -1,6 +1,7 @@
 ## JenkinsCI
 
-Add the following code to JenkinsCI shell job.
+シェルジョブに下記内容を定義して下さい。
+なお、`APP_IMAGE_ID`と`DB_IMAGE_ID`には、それぞれ新規作成したマシンイメージIDで置き換えて下さい。
 
 ```
 #!/bin/bash
@@ -15,5 +16,9 @@ cd ciscripts
 ls -l
 
 ipaddr="$(< /metadata/meta-data/local-ipv4)"
-YUM_HOST="${ipaddr}" ./web3layers-ci.sh
+
+APP_IMAGE_ID="wmi-********" \
+ DB_IMAGE_ID="wmi-********" \
+    YUM_HOST="${ipaddr}" \
+ ./web3layers-ci.sh
 ```
