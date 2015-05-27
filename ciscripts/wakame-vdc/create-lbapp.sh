@@ -17,6 +17,12 @@ instance_protocol="http"
 port_maps="8080:http"
 display_name="lb8080"
 
+#
+
+if [[ -f ${BASH_SOURCE[0]%/*}/config/${display_name} ]]; then
+  . ${BASH_SOURCE[0]%/*}/config/${display_name}
+fi
+
 ## create a load_balancer
 
 ${BASH_SOURCE[0]%/*}/gen-musselrc.sh

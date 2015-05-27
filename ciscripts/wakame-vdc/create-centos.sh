@@ -19,6 +19,12 @@ image_id="wmi-centos1d64"
 display_name="centos"
 ssh_key_id="ssh-cicddemo"
 
+#
+
+if [[ -f ${BASH_SOURCE[0]%/*}/config/${display_name} ]]; then
+  . ${BASH_SOURCE[0]%/*}/config/${display_name}
+fi
+
 ## create an instance
 
 ${BASH_SOURCE[0]%/*}/gen-musselrc.sh
