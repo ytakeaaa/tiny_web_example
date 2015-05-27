@@ -15,9 +15,19 @@ cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 
 # run instances
 
-. ${BASH_SOURCE[0]%/*}/setup-db.sh
-. ${BASH_SOURCE[0]%/*}/setup-app.sh
-. ${BASH_SOURCE[0]%/*}/setup-lbweb.sh
+eval "$(
+  ${BASH_SOURCE[0]%/*}/setup-db.sh
+)"
+
+eval "$(
+  YUM_HOST="${YUM_HOST}" DB_HOST="${DB_HOST}" \
+  ${BASH_SOURCE[0]%/*}/setup-app.sh
+)"
+
+eval "$(
+  APP_ID="${APP_ID}" \
+  ${BASH_SOURCE[0]%/*}/setup-lbweb.sh
+)"
 
 ## trap
 

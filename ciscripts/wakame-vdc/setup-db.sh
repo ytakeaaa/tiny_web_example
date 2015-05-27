@@ -9,5 +9,5 @@ eval "$(
   ${BASH_SOURCE[0]%/*}/runner-db.sh
 )"
 
-DB_ID="${instance_id}"
-DB_HOST="${ipaddr}"
+echo DB_ID="${instance_id}"
+echo DB_HOST="${ipaddr}"

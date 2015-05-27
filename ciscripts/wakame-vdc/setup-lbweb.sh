@@ -5,11 +5,13 @@ set -e
 set -o pipefail
 set -u
 
+: "${APP_ID:?"should not be empty"}"
+
 eval "$(
   ${BASH_SOURCE[0]%/*}/runner-lbweb.sh
 )"
 
-LDWEB_ID="${load_balancer_id}"
-LBWEB_HOST="${ipaddr_public}"
+${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${load_balancer_id}" "${APP_ID}" >&2
 
-${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${LDWEB_ID}" "${APP_ID}" >&2
+echo LDWEB_ID="${load_balancer_id}"
+echo LBWEB_HOST="${ipaddr_public}"
