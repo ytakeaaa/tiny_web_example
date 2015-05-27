@@ -15,9 +15,13 @@ vifs="vifs.json"
 cpu_cores="1"
 hypervisor="kvm"
 memory_size="1024"
-image_id="wmi-43n0y4mk"
+#image_id="wmi-***"
 display_name="app"
 ssh_key_id="ssh-cicddemo"
+
+#
+
+: "${image_id:?"should not be empty"}"
 
 ## create an instance
 
