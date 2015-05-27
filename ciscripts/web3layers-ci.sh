@@ -13,7 +13,7 @@ set -u
 
 cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 
-# run instances
+# setup instances
 
 eval "$(
   ${BASH_SOURCE[0]%/*}/setup-db.sh
@@ -29,7 +29,7 @@ eval "$(
   ${BASH_SOURCE[0]%/*}/setup-lbweb.sh
 )"
 
-## trap
+# cleanup
 
 trap '
  mussel instance destroy "${DB_ID}"
