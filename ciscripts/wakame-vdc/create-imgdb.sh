@@ -22,7 +22,8 @@ ssh_key_id="ssh-cicddemo"
 ## create an instance
 
 ${BASH_SOURCE[0]%/*}/gen-musselrc.sh
-. ${BASH_SOURCE[0]%/*}/gen-vifs.sh
+vifs="${vifs}" network_id="${network_id}" security_group_id="${security_group_id}" \
+ ${BASH_SOURCE[0]%/*}/gen-vifs.sh
 
 instance_id="$(
   mussel instance create \
