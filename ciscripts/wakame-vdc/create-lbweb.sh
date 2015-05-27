@@ -15,7 +15,7 @@ max_connection="1000"
 instance_port="80"
 instance_protocol="http"
 port_maps="80:http"
-display_name="lb80"
+display_name="lbweb"
 
 #
 

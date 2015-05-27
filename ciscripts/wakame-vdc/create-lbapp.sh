@@ -15,7 +15,7 @@ max_connection="1000"
 instance_port="8080"
 instance_protocol="http"
 port_maps="8080:http"
-display_name="lb8080"
+display_name="lbapp"
 
 #
 
