@@ -6,7 +6,7 @@ set -o pipefail
 set -u
 
 eval "$(
-  ${BASH_SOURCE[0]%/*}/runner-db.sh
+  ${BASH_SOURCE[0]%/*}/run-db.sh
 )"
 
 echo DB_ID="${instance_id}"

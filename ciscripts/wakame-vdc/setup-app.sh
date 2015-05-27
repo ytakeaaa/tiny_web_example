@@ -11,7 +11,7 @@ set -u
 eval "$(
  YUM_HOST="${YUM_HOST}" \
   DB_HOST="${DB_HOST}"  \
-  ${BASH_SOURCE[0]%/*}/runner-app.sh
+  ${BASH_SOURCE[0]%/*}/run-app.sh
 )"
 
 echo APP_ID="${instance_id}"
