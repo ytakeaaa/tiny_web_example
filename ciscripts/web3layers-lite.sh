@@ -28,14 +28,14 @@ eval "$(
   DB_HOST="${DB_HOST}"  \
   ${BASH_SOURCE[0]%/*}/runner-app.sh
  )"
-app_id="${instance_id}"
+APP_ID="${instance_id}"
 APP_HOST="${ipaddr}"
 
 ## trap
 
 trap "
  mussel instance destroy \"${DB_ID}\"
- mussel instance destroy \"${app_id}\"
+ mussel instance destroy \"${APP_ID}\"
 " ERR
 
 # smoketest
@@ -55,4 +55,4 @@ trap "
 # cleanup instances
 
 ${BASH_SOURCE[0]%/*}/instance-kill.sh "${DB_ID}"
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${app_id}"
+${BASH_SOURCE[0]%/*}/instance-kill.sh "${APP_ID}"

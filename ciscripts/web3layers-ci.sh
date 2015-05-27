@@ -28,7 +28,7 @@ eval "$(
   DB_HOST="${DB_HOST}"  \
   ${BASH_SOURCE[0]%/*}/runner-app.sh
  )"
-app_id="${instance_id}"
+APP_ID="${instance_id}"
 APP_HOST="${ipaddr}"
 
 # run load balancers
@@ -39,14 +39,14 @@ eval "$(${BASH_SOURCE[0]%/*}/runner-lbweb.sh)"
 lbweb_id="${load_balancer_id}"
 LBWEB_HOST="${ipaddr_public}"
 
-${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${lbweb_id}" "${app_id}"
+${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${lbweb_id}" "${APP_ID}"
 
 ## trap
 
 trap "
  ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${lbweb_id}\"
  mussel instance destroy \"${DB_ID}\"
- mussel instance destroy \"${app_id}\"
+ mussel instance destroy \"${APP_ID}\"
 " ERR
 
 # smoketest
@@ -71,4 +71,4 @@ ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${lbweb_id}"
 # cleanup instances
 
 ${BASH_SOURCE[0]%/*}/instance-kill.sh "${DB_ID}"
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${app_id}"
+${BASH_SOURCE[0]%/*}/instance-kill.sh "${APP_ID}"
