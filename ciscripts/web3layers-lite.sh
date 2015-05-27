@@ -24,11 +24,6 @@ eval "$(
   ${BASH_SOURCE[0]%/*}/setup-app.sh
 )"
 
-eval "$(
-  APP_ID="${APP_ID}" \
-  ${BASH_SOURCE[0]%/*}/setup-lbweb.sh
-)"
-
 ## trap
 
 trap '
