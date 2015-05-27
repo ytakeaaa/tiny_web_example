@@ -18,7 +18,7 @@ cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 ## db
 
 eval "$(${BASH_SOURCE[0]%/*}/runner-db.sh)"
-db_id="${instance_id}"
+DB_ID="${instance_id}"
 DB_HOST="${ipaddr}"
 
 ## app
@@ -45,7 +45,7 @@ ${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${lbweb_id}" "${app_id}
 
 trap "
  ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${lbweb_id}\"
- mussel instance destroy \"${db_id}\"
+ mussel instance destroy \"${DB_ID}\"
  mussel instance destroy \"${app_id}\"
 " ERR
 
@@ -70,5 +70,5 @@ ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${lbweb_id}"
 
 # cleanup instances
 
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${db_id}"
+${BASH_SOURCE[0]%/*}/instance-kill.sh "${DB_ID}"
 ${BASH_SOURCE[0]%/*}/instance-kill.sh "${app_id}"

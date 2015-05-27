@@ -18,7 +18,7 @@ cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 ## db
 
 eval "$(${BASH_SOURCE[0]%/*}/runner-db.sh)"
-db_id="${instance_id}"
+DB_ID="${instance_id}"
 DB_HOST="${ipaddr}"
 
 ## app
@@ -34,7 +34,7 @@ APP_HOST="${ipaddr}"
 ## trap
 
 trap "
- mussel instance destroy \"${db_id}\"
+ mussel instance destroy \"${DB_ID}\"
  mussel instance destroy \"${app_id}\"
 " ERR
 
@@ -54,5 +54,5 @@ trap "
 
 # cleanup instances
 
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${db_id}"
+${BASH_SOURCE[0]%/*}/instance-kill.sh "${DB_ID}"
 ${BASH_SOURCE[0]%/*}/instance-kill.sh "${app_id}"
