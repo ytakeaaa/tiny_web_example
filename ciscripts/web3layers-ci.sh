@@ -50,6 +50,7 @@ if [[ -n "${JENKINS_HOME:-""}" ]]; then
 else
   # stand alone
   APP_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-app.sh
-  WEB_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-web.sh
-  WEB_HOST="${LBWEB_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-web.sh
 fi
+
+WEB_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-web.sh
+WEB_HOST="${LBWEB_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-web.sh
