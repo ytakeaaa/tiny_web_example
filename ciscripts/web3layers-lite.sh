@@ -15,28 +15,15 @@ cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 
 # run instances
 
-## db
-
-eval "$(${BASH_SOURCE[0]%/*}/runner-db.sh)"
-DB_ID="${instance_id}"
-DB_HOST="${ipaddr}"
-
-## app
-
-eval "$(
- YUM_HOST="${YUM_HOST}" \
-  DB_HOST="${DB_HOST}"  \
-  ${BASH_SOURCE[0]%/*}/runner-app.sh
- )"
-APP_ID="${instance_id}"
-APP_HOST="${ipaddr}"
+. ${BASH_SOURCE[0]%/*}/setup-db.sh
+. ${BASH_SOURCE[0]%/*}/setup-app.sh
 
 ## trap
 
-trap "
- mussel instance destroy \"${DB_ID}\"
- mussel instance destroy \"${APP_ID}\"
-" ERR
+trap '
+ mussel instance destroy "${DB_ID}"
+ mussel instance destroy "${APP_ID}"
+' ERR EXIT
 
 # smoketest
 
@@ -51,8 +38,3 @@ trap "
   APP_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-app.sh
   WEB_HOST="${APP_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-web.sh
 #fi
-
-# cleanup instances
-
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${DB_ID}"
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${APP_ID}"

@@ -15,39 +15,17 @@ cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 
 # run instances
 
-## db
-
-eval "$(${BASH_SOURCE[0]%/*}/runner-db.sh)"
-DB_ID="${instance_id}"
-DB_HOST="${ipaddr}"
-
-## app
-
-eval "$(
- YUM_HOST="${YUM_HOST}" \
-  DB_HOST="${DB_HOST}"  \
-  ${BASH_SOURCE[0]%/*}/runner-app.sh
- )"
-APP_ID="${instance_id}"
-APP_HOST="${ipaddr}"
-
-# run load balancers
-
-## lbweb
-
-eval "$(${BASH_SOURCE[0]%/*}/runner-lbweb.sh)"
-LDWEB_ID="${load_balancer_id}"
-LBWEB_HOST="${ipaddr_public}"
-
-${BASH_SOURCE[0]%/*}/load_balancer-register-instance.sh "${LDWEB_ID}" "${APP_ID}"
+. ${BASH_SOURCE[0]%/*}/setup-db.sh
+. ${BASH_SOURCE[0]%/*}/setup-app.sh
+. ${BASH_SOURCE[0]%/*}/setup-lbweb.sh
 
 ## trap
 
-trap "
- ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh \"${LDWEB_ID}\"
- mussel instance destroy \"${DB_ID}\"
- mussel instance destroy \"${APP_ID}\"
-" ERR
+trap '
+ mussel instance destroy "${DB_ID}"
+ mussel instance destroy "${APP_ID}"
+ ${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${LDWEB_ID}"
+' ERR EXIT
 
 # smoketest
 
@@ -63,12 +41,3 @@ trap "
   WEB_HOST="${APP_HOST}"   ${BASH_SOURCE[0]%/*}/smoketest-web.sh
   WEB_HOST="${LBWEB_HOST}" ${BASH_SOURCE[0]%/*}/smoketest-web.sh
 #fi
-
-# cleanup load balancers
-
-${BASH_SOURCE[0]%/*}/load_balancer-kill.sh "${LDWEB_ID}"
-
-# cleanup instances
-
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${DB_ID}"
-${BASH_SOURCE[0]%/*}/instance-kill.sh "${APP_ID}"
