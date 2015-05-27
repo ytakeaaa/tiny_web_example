@@ -4,6 +4,8 @@ set -e
 set -o pipefail
 set -u
 
+: "${IMAGE_ID:?"should not be empty"}"
+
 # vifs
 
 network_id="nw-demo1"
@@ -15,7 +17,7 @@ vifs="vifs.json"
 cpu_cores="1"
 hypervisor="kvm"
 memory_size="512"
-#image_id="wmi-***"
+image_id="${IMAGE_ID}"
 display_name="db"
 ssh_key_id="ssh-cicddemo"
 
@@ -24,10 +26,6 @@ ssh_key_id="ssh-cicddemo"
 if [[ -f ${BASH_SOURCE[0]%/*}/config/${display_name} ]]; then
   . ${BASH_SOURCE[0]%/*}/config/${display_name}
 fi
-
-#
-
-: "${image_id:?"should not be empty"}"
 
 ## create an instance
 
