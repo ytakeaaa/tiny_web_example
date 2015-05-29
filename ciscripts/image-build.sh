@@ -28,11 +28,17 @@ image_id="${IMAGE_ID}"
 ssh_key_id="ssh-cicddemo"
 
 # create an musselrc
-${BASH_SOURCE[0]%/*}/gen-musselrc.sh
+cat <<EOS > ~/.musselrc
+DCMGR_HOST=10.0.2.2
+account_id=a-shpoolxx
+EOS
 
 # create an vifs
-vifs="${vifs}" network_id="${network_id}" security_group_id="${security_group_id}" \
-    ${BASH_SOURCE[0]%/*}/gen-vifs.sh
+cat <<EOS > "${vifs}"
+{
+ "eth0":{"network":"${network_id}","security_groups":"${security_group_id}"}
+}
+EOS
 
 ## create database image
 
@@ -58,18 +64,24 @@ trap 'mussel instance destroy "${instance_id}"' ERR
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: running")"' ]]
 
-eval "$(${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}")"
+ipaddr="$(
+  mussel instance show "${instance_id}" \
+  | egrep :address:  \
+  | awk '{print $2}' \
+  | tr '\n' ','
+)"
+: "${ipaddr:?"should not be empty"}"
+ipaddr="${ipaddr%%,}"
 
-{
-  ${BASH_SOURCE[0]%/*}/instance-wait4ssh.sh  "${instance_id}"
-  ${BASH_SOURCE[0]%/*}/instance-exec.sh      "${instance_id}" < ${BASH_SOURCE[0]%/*}/provision-imgdb.sh
-} >&2
+${BASH_SOURCE[0]%/*}/instance-wait4ssh.sh  "${instance_id}"
+${BASH_SOURCE[0]%/*}/instance-exec.sh      "${instance_id}" < ${BASH_SOURCE[0]%/*}/provision-imgdb.sh
+
 
 mussel instance poweroff --force false ${instance_id}
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: halted")"' ]]
 
-DB_IMAGE_ID="$(mussel instance backup ${instance_id} | egrep ^:image_id: | awk '{print $2}')"
+DB_IMAGE_ID="$(mussel instance backup ${instance_id} --display-name db | egrep ^:image_id: | awk '{print $2}')"
 echo "database image id: ${DB_IMAGE_ID}"
 
 retry_until [[ '"$(mussel image show "${DB_IMAGE_ID}" | egrep -w "^:state: available")"' ]]
@@ -100,20 +112,25 @@ trap 'mussel instance destroy "${instance_id}"' ERR
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: running")"' ]]
 
-eval "$(${BASH_SOURCE[0]%/*}/instance-get-ipaddr.sh "${instance_id}")"
+ipaddr="$(
+  mussel instance show "${instance_id}" \
+  | egrep :address:  \
+  | awk '{print $2}' \
+  | tr '\n' ','
+)"
+: "${ipaddr:?"should not be empty"}"
+ipaddr="${ipaddr%%,}"
 
-{
-  ${BASH_SOURCE[0]%/*}/instance-wait4ssh.sh  "${instance_id}"
-  ${BASH_SOURCE[0]%/*}/instance-exec.sh      "${instance_id}" \
-		      YUM_HOST="${YUM_HOST}" \
-		      bash -l < ${BASH_SOURCE[0]%/*}/provision-imgapp.sh
-} >&2
+${BASH_SOURCE[0]%/*}/instance-wait4ssh.sh  "${instance_id}"
+${BASH_SOURCE[0]%/*}/instance-exec.sh      "${instance_id}" \
+		    YUM_HOST="${YUM_HOST}" \
+		    bash -l < ${BASH_SOURCE[0]%/*}/provision-imgapp.sh
 
 mussel instance poweroff --force false ${instance_id}
 
 retry_until [[ '"$(mussel instance show "${instance_id}" | egrep -w "^:state: halted")"' ]]
 
-APP_IMAGE_ID="$(mussel instance backup ${instance_id} | egrep ^:image_id: | awk '{print $2}')"
+APP_IMAGE_ID="$(mussel instance backup ${instance_id} --display-name app | egrep ^:image_id: | awk '{print $2}')"
 echo "app image id: ${APP_IMAGE_ID}"
 
 RETRY_WAIT_SEC=180 retry_until [[ '"$(mussel image show "${APP_IMAGE_ID}" | egrep -w "^:state: available")"' ]]
