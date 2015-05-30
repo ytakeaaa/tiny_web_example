@@ -13,4 +13,5 @@ describe Webapi::Models::Comment do
   #  expect { Webapi::Models::Comment.create(:display_name => "spec test 2",
   #                                          :comment => "test comment.") }.to raise_error(Sequel::ValidationFailed)
   # end
+  #
 end
