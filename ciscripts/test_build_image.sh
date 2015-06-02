@@ -25,7 +25,7 @@ DCMGR_HOST=10.0.2.2
 account_id=a-shpoolxx
 EOS
 export MUSSEL_RC=~/.musselrc
-cat ~./musselrc
+cat ~/.musselrc
 
 # create an vifs
 cat <<EOS > "${vifs}"
