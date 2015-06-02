@@ -9,7 +9,8 @@ set -u
 set -x
 
 ls ./
-pwd
+CUR=`pwd`
+echo "Current Directory=$CUR"
 
 echo "--- unit test ---"
 bash ./ciscripts/unit-test.sh
@@ -30,11 +31,15 @@ echo "--- image build ---"
 bash ./image-build.sh
 
 image_ids=($(cat $WRITE_FILE))
-export DB_IMAGE_ID=${image_ids[0]}
-export APP_IMAGE_ID=${image_ids[1]}
+TMP_DB_IMG=`echo ${image_ids[0]} | cut -d "=" -f 2`
+TMP_APP_IMG=`echo ${image_ids[1]} | cut -d "=" -f 2`
+export DB_IMAGE_ID=$TMP_DB_IMG
+export APP_IMAGE_ID=$TMP_APP_IMG
 echo DB_IMAGE_ID=$DB_IMAGE_ID
 echo APP_IMAGE_ID=$APP_IMAGE_ID
 
+cd $CUR
+cd ciscripts
 echo "--- web 3 layer ci ---"
 bash ./web3layers-ci.sh
 
