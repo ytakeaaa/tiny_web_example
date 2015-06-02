@@ -24,6 +24,7 @@ cat <<EOS > ~/.musselrc
 DCMGR_HOST=10.0.2.2
 account_id=a-shpoolxx
 EOS
+export MUSSEL_RC=/test/musselrc
 
 # create an vifs
 cat <<EOS > "${vifs}"
@@ -33,6 +34,7 @@ cat <<EOS > "${vifs}"
 EOS
 
 ## create database image
+echo "--create db image start--"
 
 # db display name
 display_name="db"
